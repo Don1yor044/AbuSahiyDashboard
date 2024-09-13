@@ -176,6 +176,7 @@ const Company = () => {
       title: "website",
       dataIndex: "website",
       key: "website",
+      //@ts-ignore
       render: (text: any, record: any) => {
         return <Link> {text}</Link>;
       },
