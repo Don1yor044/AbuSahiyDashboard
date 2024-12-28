@@ -79,7 +79,10 @@ export const Products = ({
       console.log("region", regionSelect);
       console.log("data", dataSource);
 
+      let filtered = dataSource;
+
       try {
+        // Agar search mavjud bo'lsa, API dan ma'lumotni olish
         if (search.trim()) {
           const response = await axios.get(
             `https://api.abusahiy.uz/api/client/admin/dashboard/show/${search}`,
@@ -89,29 +92,25 @@ export const Products = ({
               },
             }
           );
-          console.log(response.data);
+          filtered = response.data.data; // response dan olingan ma'lumot
         }
-      } catch (error) {
-        console.error("API error:", error);
-        setFilteredData([]);
-      }
 
-      let filtered = dataSource;
-
-      if (regionSelect) {
-        if (regionSelect.toUpperCase() === "SHOTA") {
-          filtered = dataSource; // Barcha mahsulotni ko'rsatish
-        } else {
+        // Region bo'yicha filtrni amalga oshirish
+        if (regionSelect && regionSelect.toUpperCase() !== "SHOTA") {
           filtered = filtered.filter(
             (item) =>
               item.address &&
               item.address.toUpperCase() === regionSelect.toUpperCase()
           );
         }
-      }
-      console.log(filtered, "filtered data"); // Debugging filtered data
 
-      setFilteredData(filtered);
+        console.log(filtered, "filtered data"); // Debugging filtered data
+        setFilteredData(filtered);
+      } catch (error) {
+        console.error("API error:", error);
+        setFilteredData([]);
+      }
+
       setIsloading(false);
     };
 
