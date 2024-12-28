@@ -46,7 +46,7 @@ export const Login = () => {
   return (
     <div className="flex justify-center  items-center h-screen">
       <div>
-        <img src="../../../public/abuSahiy.png" alt="" />
+        <img src="../abuSahiy.png" alt="" />
         <Form
           name="basic"
           style={{ minWidth: 400 }}

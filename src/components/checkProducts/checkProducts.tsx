@@ -65,7 +65,7 @@ export const CheckProducts = ({ search }: { search: string }) => {
           <Products dataSource={currentItems} search={search} />
         </>
       )}
-      <StyleDiv>`
+      <StyleDiv>
         <Pagination
           current={currentPage}
           total={dataSource.length}
