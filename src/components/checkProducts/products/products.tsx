@@ -9,9 +9,11 @@ import { css } from "@emotion/react";
 export const Products = ({
   dataSource,
   search,
+  regionSelect,
 }: {
   dataSource: Idata[];
   search: string;
+  regionSelect: string;
 }) => {
   const [filteredData, setFilteredData] = useState<Idata[]>(dataSource);
   const [CardValue, setCardValue] = useState(0);
@@ -74,9 +76,11 @@ export const Products = ({
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       setIsloading(true);
+      console.log("region", regionSelect);
+      console.log("data", dataSource);
 
-      if (search.trim()) {
-        try {
+      try {
+        if (search.trim()) {
           const response = await axios.get(
             `https://api.abusahiy.uz/api/client/admin/dashboard/show/${search}`,
             {
@@ -86,22 +90,35 @@ export const Products = ({
             }
           );
           console.log(response.data);
-
-          setFilteredData(response.data.data || dataSource);
-          setIsloading(false);
-        } catch (error) {
-          console.error("API error:", error);
-          setFilteredData([]);
-          setIsloading(false);
         }
-      } else {
-        setFilteredData(dataSource);
-        setIsloading(false);
+      } catch (error) {
+        console.error("API error:", error);
+        setFilteredData([]);
       }
+
+      let filtered = dataSource;
+
+      if (regionSelect) {
+        filtered = filtered.filter(
+          (item) =>
+            item.address &&
+            item.address.toUpperCase() === regionSelect.toUpperCase()
+        );
+        if (filtered.length === 0) {
+          // If no items match, show all data
+          filtered = dataSource;
+        }
+      }
+
+      console.log(filtered, "filtered data"); // Debugging filtered data
+
+      setFilteredData(filtered);
+      setIsloading(false);
     };
 
     fetchData();
-  }, [search, dataSource]);
+  }, [search, dataSource, regionSelect]);
+
   return (
     <>
       <div css={scrollStyles} className="overflow-auto max-h-[80vh] p-2">
@@ -125,7 +142,7 @@ export const Products = ({
                           {item.user_id}
                         </Typography>
                       </div>
-                      <div className="min-w-64 pr-[10px] border-2 border-[#ddd] text-center p-2">
+                      <div className="min-w-72 pr-[10px] border-2 border-[#ddd] text-center p-2">
                         <Typography className="text-sm font-medium">
                           {item.fullName}
                         </Typography>
@@ -188,39 +205,6 @@ export const Products = ({
                           </Typography>
                         )}
                       </div>
-                      <div className="min-w-32 pr-[10px] border-2 border-[#ddd] text-center p-2">
-                        {editingField.id === item.id &&
-                        editingField.field === "payme" ? (
-                          <div className="flex items-center space-x-2 max-h-[20px]">
-                            <Input
-                              size="small"
-                              value={PaymeValue}
-                              onChange={(e) =>
-                                setPaymeValue(Number(e.target.value))
-                              }
-                              onPressEnter={() => handleConfirm(item.id)}
-                              className="w-full"
-                            />
-                            <Button
-                              size="small"
-                              type="primary"
-                              onClick={() => handleConfirm(item.id)}
-                            >
-                              Save
-                            </Button>
-                          </div>
-                        ) : (
-                          <Typography
-                            className="text-sm"
-                            onClick={() => {
-                              setPaymeValue(item.payme || 0);
-                              startEditing(item.id, "payme");
-                            }}
-                          >
-                            {item.payme || 0}
-                          </Typography>
-                        )}
-                      </div>
                       <div className="min-w-40 pr-[10px] border-2 border-[#ddd] text-center p-2">
                         {editingField.id === item.id &&
                         editingField.field === "cash" ? (
@@ -251,6 +235,39 @@ export const Products = ({
                             }}
                           >
                             {item.cash || 0}
+                          </Typography>
+                        )}
+                      </div>{" "}
+                      <div className="min-w-32 pr-[10px] border-2 border-[#ddd] text-center p-2">
+                        {editingField.id === item.id &&
+                        editingField.field === "payme" ? (
+                          <div className="flex items-center space-x-2 max-h-[20px]">
+                            <Input
+                              size="small"
+                              value={PaymeValue}
+                              onChange={(e) =>
+                                setPaymeValue(Number(e.target.value))
+                              }
+                              onPressEnter={() => handleConfirm(item.id)}
+                              className="w-full"
+                            />
+                            <Button
+                              size="small"
+                              type="primary"
+                              onClick={() => handleConfirm(item.id)}
+                            >
+                              Save
+                            </Button>
+                          </div>
+                        ) : (
+                          <Typography
+                            className="text-sm"
+                            onClick={() => {
+                              setPaymeValue(item.payme || 0);
+                              startEditing(item.id, "payme");
+                            }}
+                          >
+                            {item.payme || 0}
                           </Typography>
                         )}
                       </div>
@@ -297,12 +314,12 @@ export const Products = ({
                             : "\u00A0"}
                         </Typography>
                       </div>
-                      <div className="min-w-32 pr-[10px] border-2 border-[#ddd] text-center p-2">
+                      <div className="min-w-40 pr-[10px] border-2 border-[#ddd] text-center p-2">
                         <Typography className="text-sm ">
                           {item.actual_payment_fee || 0}
                         </Typography>
                       </div>
-                      <div className="min-w-32 pr-[10px] border-2 border-[#ddd] text-center p-2">
+                      <div className="min-w-36 pr-[10px] border-2 border-[#ddd] text-center p-2">
                         <Typography className="text-sm ">
                           {item.payment_fee || 0}
                         </Typography>

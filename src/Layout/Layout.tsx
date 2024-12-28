@@ -8,9 +8,16 @@ import { HeaderPage } from "../components/checkProducts/header/header";
 const { Header, Sider, Content } = Layout;
 interface LayoutPageProps {
   search: string;
+  regionSelect: string;
   setSearch: Dispatch<SetStateAction<string>>;
+  setRegionSelect: Dispatch<SetStateAction<string>>;
 }
-const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
+const LayoutPage = ({
+  search,
+  setSearch,
+  regionSelect,
+  setRegionSelect,
+}: LayoutPageProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const location = useLocation();
   return (
@@ -46,7 +53,12 @@ const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
               className="!hover:bg-[#FF602D]"
             />
             {location.pathname == "/checkProducts" ? (
-              <HeaderPage search={search} setSearch={setSearch} />
+              <HeaderPage
+                search={search}
+                setSearch={setSearch}
+                regionSelect={regionSelect}
+                setRegionSelect={setRegionSelect}
+              />
             ) : (
               <></>
             )}

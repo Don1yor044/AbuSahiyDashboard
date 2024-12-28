@@ -13,9 +13,13 @@ interface IRegion {
 export const HeaderPage = ({
   search,
   setSearch,
+  regionSelect,
+  setRegionSelect,
 }: {
   search: string;
   setSearch: React.Dispatch<React.SetStateAction<string>>;
+  regionSelect: string;
+  setRegionSelect: React.Dispatch<React.SetStateAction<string>>;
 }) => {
   const navigate = useNavigate();
   const [regions, setRegions] = useState([]);
@@ -49,6 +53,7 @@ export const HeaderPage = ({
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
+    setRegionSelect(value);
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -83,7 +88,7 @@ export const HeaderPage = ({
         </div>
         <div>
           <Select
-            defaultValue="All"
+            defaultValue={regionSelect}
             style={{ minWidth: 120 }}
             onChange={handleChange}
             options={regions.map((region: IRegion) => ({

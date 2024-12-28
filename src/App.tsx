@@ -17,18 +17,28 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
 const App = () => {
   const [search, setSearch] = useState<string>("");
+  const [regionSelect, setRegionSelect] = useState<string>("Shota");
 
   return (
     <Router>
       <Routes>
         <Route path="/" index element={<Login />} />
         <Route path="*" element={<NotFound />} />
-        <Route element={<LayoutPage search={search} setSearch={setSearch} />}>
+        <Route
+          element={
+            <LayoutPage
+              search={search}
+              setSearch={setSearch}
+              regionSelect={regionSelect}
+              setRegionSelect={setRegionSelect}
+            />
+          }
+        >
           <Route
             path="/checkProducts"
             element={
               <ProtectedRoute>
-                <CheckProducts search={search} />
+                <CheckProducts search={search} regionSelect={regionSelect} />
               </ProtectedRoute>
             }
           />

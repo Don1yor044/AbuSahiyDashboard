@@ -7,7 +7,13 @@ import { Pagination } from "antd";
 import { Idata } from "../../types";
 import styled from "styled-components";
 
-export const CheckProducts = ({ search }: { search: string }) => {
+export const CheckProducts = ({
+  search,
+  regionSelect,
+}: {
+  search: string;
+  regionSelect: string;
+}) => {
   const navigate = useNavigate();
   const [dataSource, setDataSource] = useState<Idata[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,7 +67,11 @@ export const CheckProducts = ({ search }: { search: string }) => {
         <SkeletonComponent />
       ) : (
         <>
-          <Products dataSource={dataSource} search={search} />
+          <Products
+            dataSource={dataSource}
+            search={search}
+            regionSelect={regionSelect}
+          />
         </>
       )}
       <StyleDiv>
