@@ -27,6 +27,9 @@ export const ProductHeader = () => (
       <div className="min-w-40 pr-[10px] border-r-2 border-[#ddd] text-center">
         <Typography className="text-sm font-medium">Card</Typography>
       </div>
+      <div className="min-w-32 pr-[10px] border-r-2 text-center border-[#ddd]">
+        <Typography className="text-sm font-medium">Payme</Typography>
+      </div>
       <div className="min-w-40 pr-[10px] border-r-2 border-[#ddd] text-center">
         <Typography className="text-sm font-medium">Cash</Typography>
       </div>
@@ -39,17 +42,14 @@ export const ProductHeader = () => (
       <div className="min-w-52 pr-[10px] border-r-2 text-center border-[#ddd]">
         <Typography className="text-sm font-medium">Express Name</Typography>
       </div>
-      <div className="min-w-48 pr-[10px] border-r-2 text-center border-[#ddd]">
-        <Typography className="text-sm font-medium">Purchase time</Typography>
-      </div>
-      <div className="min-w-32 pr-[10px] border-r-2 text-center border-[#ddd]">
-        <Typography className="text-sm font-medium">Payme</Typography>
-      </div>
       <div className="min-w-32 pr-[10px] border-r-2 text-center border-[#ddd]">
         <Typography className="text-sm font-medium">Actual payment</Typography>
       </div>
       <div className="min-w-32 pr-[10px] border-r-2 text-center border-[#ddd]">
         <Typography className="text-sm font-medium">Payment fee</Typography>
+      </div>
+      <div className="min-w-48 pr-[10px] border-r-2 text-center border-[#ddd]">
+        <Typography className="text-sm font-medium">Purchase time</Typography>
       </div>
     </Row>
   </div>
