@@ -13,7 +13,7 @@ export const ProductHeader = () => (
         <Typography className="text-sm font-medium">Phone Number</Typography>
       </div>
       <div className="min-w-36 pr-[10px] border-r-2 border-[#ddd] text-center">
-        <Typography className="text-sm font-medium">Weight</Typography>
+        <Typography className="text-sm font-medium">Weight (gr)</Typography>
       </div>
       <div className="min-w-28 pr-[10px] border-r-2 border-[#ddd] text-center">
         <Typography className="text-sm font-medium">Count</Typography>

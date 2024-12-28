@@ -99,17 +99,16 @@ export const Products = ({
       let filtered = dataSource;
 
       if (regionSelect) {
-        filtered = filtered.filter(
-          (item) =>
-            item.address &&
-            item.address.toUpperCase() === regionSelect.toUpperCase()
-        );
-        if (filtered.length === 0) {
-          // If no items match, show all data
-          filtered = dataSource;
+        if (regionSelect.toUpperCase() === "SHOTA") {
+          filtered = dataSource; // Barcha mahsulotni ko'rsatish
+        } else {
+          filtered = filtered.filter(
+            (item) =>
+              item.address &&
+              item.address.toUpperCase() === regionSelect.toUpperCase()
+          );
         }
       }
-
       console.log(filtered, "filtered data"); // Debugging filtered data
 
       setFilteredData(filtered);

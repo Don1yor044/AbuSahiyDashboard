@@ -17,7 +17,7 @@ const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
 
 const App = () => {
   const [search, setSearch] = useState<string>("");
-  const [regionSelect, setRegionSelect] = useState<string>("Shota");
+  const [regionSelect, setRegionSelect] = useState<string>("SHOTA");
 
   return (
     <Router>
