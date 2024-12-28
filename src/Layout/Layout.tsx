@@ -19,7 +19,7 @@ const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
     <Layout className="h-[100vh] !bg-gray-100">
       <Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="flex justify-center py-6">
-          <img src="../../public/abuSahiy.png" className="w-20" alt="Logo" />
+          <img src="../abuSahiy.png" className="w-20" alt="Logo" />
         </div>
         <SidebarMenu />
       </Sider>
