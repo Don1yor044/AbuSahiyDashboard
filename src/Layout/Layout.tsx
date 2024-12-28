@@ -1,85 +1,71 @@
-/** @jsxImportSource @emotion/react */
-import { useState } from "react";
-import {
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-} from "@ant-design/icons";
-import { Layout, Menu } from "antd";
-import { Outlet, useLocation, useNavigate } from "react-router";
-import { css } from "@emotion/react";
-import { Link } from "react-router-dom";
+import { Layout, Button } from "antd";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Dispatch, SetStateAction, useState } from "react";
+import SidebarMenu from "../components/sidebarMenu/sidebarMenu";
+import { Outlet, useLocation } from "react-router";
+import { HeaderPage } from "../components/checkProducts/header/header";
 
-const { Sider, Content } = Layout;
-
-export const Layouts = () => {
-  const [collapsed, setCollapsed] = useState(false);
+const { Header, Sider, Content } = Layout;
+interface LayoutPageProps {
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
+}
+const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
+  const [collapsed, setCollapsed] = useState(true);
   const location = useLocation();
-  const navigate = useNavigate();
-  const currentPath = location.pathname;
-
-  const defaultSelectedKey = currentPath === "/" ? "/" : currentPath;
-
-  const handleMenuClick = (pagePath: string) => {
-    navigate(pagePath);
-  };
+  console.log(location.pathname);
 
   return (
-    <Layout>
-      <Sider
-        trigger={null}
-        collapsible
-        collapsed={collapsed}
-        style={{ height: "100vh" }}
-      >
-        <div className="flex items-center justify-end">
-          <button
-            onClick={() => setCollapsed(!collapsed)}
-            css={css`
-              font-size: 16px;
-              margin-right: 10px;
-              margin-top: 25px;
-              width: 64;
-              height: 64;
-              color: white;
-            `}
-          >
-            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-          </button>
+    <Layout className="h-[100vh] !bg-gray-100">
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="flex justify-center py-6">
+          <img src="../../public/abuSahiy.png" className="w-20" alt="Logo" />
         </div>
-        <div className="demo-logo-vertical" />
-        <Menu
-          css={css`
-            margin-top: 10px;
-          `}
-          mode="inline"
-          theme="dark"
-          defaultSelectedKeys={[defaultSelectedKey]}
-          selectedKeys={[defaultSelectedKey]}
-          items={[
-            {
-              key: "/",
-              icon: <UserOutlined />,
-              label: <Link to="/">Company </Link>,
-              onClick: () => handleMenuClick("/"),
-              className: currentPath === "/" ? "active-menu-item" : "",
-            },
-            {
-              key: "/Job",
-              icon: <VideoCameraOutlined />,
-              label: <Link to="/Job">Job </Link>,
-              onClick: () => handleMenuClick("/Job"),
-              className: currentPath === "/Job" ? "active-menu-item" : "",
-            },
-          ]}
-        />
+        <SidebarMenu />
       </Sider>
       <Layout>
-        <Content>
+        <Header
+          style={{
+            padding: 0,
+            background:
+              "linear-gradient(90deg, #ff602d 0%, rgba(255,160,80,1) 100%)",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.2)",
+          }}
+        >
+          <div className="flex">
+            <Button
+              type="text"
+              icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+              onClick={() => setCollapsed(!collapsed)}
+              style={{
+                fontSize: "18px",
+                width: 64,
+                height: 64,
+                color: "white",
+                borderRadius: "10px",
+                transition: "background-color 0.3s ease",
+              }}
+              className="!hover:bg-[#FF602D]"
+            />
+            {location.pathname == "/checkProducts" ? (
+              <HeaderPage search={search} setSearch={setSearch} />
+            ) : (
+              <></>
+            )}
+          </div>
+        </Header>
+        <Content
+          style={{
+            backgroundColor: "#fff",
+            padding: "20px",
+            boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
+          }}
+        >
           <Outlet />
         </Content>
       </Layout>
     </Layout>
   );
 };
+
+export default LayoutPage;
