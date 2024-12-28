@@ -12,6 +12,7 @@ export const CheckProducts = ({ search }: { search: string }) => {
   const [dataSource, setDataSource] = useState<Idata[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -20,7 +21,7 @@ export const CheckProducts = ({ search }: { search: string }) => {
     }
   }, [navigate]);
 
-  const fetchData = async () => {
+  const fetchData = async (page: number) => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
@@ -29,16 +30,15 @@ export const CheckProducts = ({ search }: { search: string }) => {
       }
       setLoading(true);
       const response = await axios.get(
-        ` https://api.abusahiy.uz/api/client/admin/dashboard`,
+        `https://api.abusahiy.uz/api/client/admin/dashboard?page=${page}&pageSize=${pageSize}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
-      console.log(response.data.data, "data");
-
       setDataSource(response.data.data);
+      setTotalItems(response.data.total_items);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -46,32 +46,31 @@ export const CheckProducts = ({ search }: { search: string }) => {
     }
   };
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData(currentPage);
+  }, [currentPage]);
 
   const pageSize = 20;
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const currentItems = dataSource.slice(startIndex, endIndex);
+
   const onPageChange = (page: number) => {
     setCurrentPage(page);
   };
+
   return (
     <div>
       {loading ? (
         <SkeletonComponent />
       ) : (
         <>
-          <Products dataSource={currentItems} search={search} />
+          <Products dataSource={dataSource} search={search} />
         </>
       )}
       <StyleDiv>
         <Pagination
           current={currentPage}
-          total={dataSource.length}
+          total={totalItems} // `totalItems` serverdan olingan jami elementlar soni
           pageSize={pageSize}
           onChange={onPageChange}
-          showSizeChanger={false} // To disable changing page size
+          showSizeChanger={false} // Sahifa hajmini o'zgartirishni o'chirish
         />
       </StyleDiv>
     </div>

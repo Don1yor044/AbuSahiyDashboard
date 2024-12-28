@@ -62,7 +62,7 @@ export const HeaderPage = ({
       <div className="flex gap-10 items-center mb-10">
         <div>
           <div className="background-white flex w-full items-center gap-5 px-10">
-            <div className="flex align-center items-center p-0 bg-[#EDEFF3] h-[40px] px-5 rounded-full">
+            <div className="flex align-center items-center p-0 bg-white h-[40px] px-5 rounded-full">
               <Input
                 placeholder="Qidirish"
                 value={search}
@@ -75,7 +75,7 @@ export const HeaderPage = ({
                   height: "39px",
                   width: "250px",
                   border: "none",
-                  background: "#EDEFF3",
+                  background: "white",
                 }}
               />
             </div>{" "}

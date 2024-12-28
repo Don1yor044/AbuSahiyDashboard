@@ -13,8 +13,6 @@ interface LayoutPageProps {
 const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
   const [collapsed, setCollapsed] = useState(true);
   const location = useLocation();
-  console.log(location.pathname);
-
   return (
     <Layout className="h-[100vh] !bg-gray-100">
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -57,7 +55,7 @@ const LayoutPage = ({ search, setSearch }: LayoutPageProps) => {
         <Content
           style={{
             backgroundColor: "#fff",
-            padding: "20px",
+            // padding: "0px",
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
           }}
         >

@@ -1,8 +1,10 @@
+/** @jsxImportSource @emotion/react */
 import { Button, Empty, Input, Row, Typography } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Idata } from "../../../types";
 import { ProductHeader } from "./productHeader/productHeader";
+import { css } from "@emotion/react";
 
 export const Products = ({
   dataSource,
@@ -30,10 +32,10 @@ export const Products = ({
       const response = await axios.put(
         `https://api.abusahiy.uz/api/client/admin/dashboard/${id}`,
         {
-          card: CardValue,
-          cash: CashValue,
-          payme: PaymeValue,
-          comment: CommentValue,
+          card: CardValue || 0,
+          cash: CashValue || 0,
+          payme: PaymeValue || 0,
+          comment: CommentValue || "",
         },
         {
           headers: {
@@ -95,7 +97,7 @@ export const Products = ({
   }, [search, dataSource]);
   return (
     <>
-      <div className="overflow-auto max-h-[80vh] p-2">
+      <div css={scrollStyles} className="overflow-auto max-h-[80vh] p-2">
         <ProductHeader />
         {filteredData.length > 0 ? (
           <Row className="mt-3">
@@ -299,3 +301,8 @@ export const Products = ({
     </>
   );
 };
+
+const scrollStyles = css`
+  scrollbar-width: thin; /* Sets to thin scrollbar */
+  scrollbar-color: #f9784d #ffffff; /* Sets thumb and track colors */
+`;
