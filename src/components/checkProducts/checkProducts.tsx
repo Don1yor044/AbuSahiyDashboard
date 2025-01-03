@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { SkeletonComponent } from "./skeleton/skeleton";
+import { SkeletonComponent } from "../skeleton/skeleton";
 import { Products } from "./products/products";
 import { Pagination } from "antd";
 import { Idata } from "../../types";

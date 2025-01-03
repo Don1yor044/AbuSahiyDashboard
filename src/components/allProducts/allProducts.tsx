@@ -2,7 +2,7 @@ import { Col, Row, Typography } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { SkeletonComponent } from "../checkProducts/skeleton/skeleton";
+import { SkeletonComponent } from "../skeleton/skeleton";
 import { Idata } from "../../types";
 
 export const AllProducts = () => {
