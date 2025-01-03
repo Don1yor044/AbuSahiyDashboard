@@ -44,12 +44,14 @@ export const Login = () => {
     console.log("Failed:", errorInfo);
   };
   return (
-    <div className="flex justify-center  items-center h-screen">
+    <div className="flex justify-center items-center h-screen">
       <div>
-        <img src="../abuSahiy.png" alt="" />
+        <div className="flex justify-center">
+          <img src="../abuSahiy.png" alt="abuSahiy" className="w-64" />
+        </div>
         <Form
           name="basic"
-          style={{ minWidth: 400 }}
+          style={{ minWidth: 350 }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
           autoComplete="off"

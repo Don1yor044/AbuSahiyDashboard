@@ -23,8 +23,13 @@ const LayoutPage = ({
   return (
     <Layout className="h-[100vh] !bg-gray-100">
       <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="flex justify-center py-6">
-          <img src="../abuSahiy.png" className="w-20" alt="Logo" />
+        <div className="flex justify-center my-6 cursor-pointer">
+          <img
+            src="../abuSahiy.png"
+            className="w-20 "
+            onClick={() => window.location.reload()}
+            alt="Logo"
+          />
         </div>
         <SidebarMenu />
       </Sider>
@@ -67,7 +72,6 @@ const LayoutPage = ({
         <Content
           style={{
             backgroundColor: "#fff",
-            // padding: "0px",
             boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
           }}
         >

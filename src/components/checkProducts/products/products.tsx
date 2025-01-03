@@ -32,7 +32,6 @@ export const Products = ({
   });
   const handleConfirm = async (id: number) => {
     const token = localStorage.getItem("token");
-    setIsloading(true);
     try {
       const response = await axios.put(
         `https://api.abusahiy.uz/api/client/admin/dashboard/${id}`,
@@ -49,8 +48,6 @@ export const Products = ({
         }
       );
       console.log("Yangi qiymat serverga jo'natildi:", response.data.data);
-      setIsloading(false);
-
       setFilteredData((prevData) =>
         prevData.map((item) =>
           item.id === id
@@ -102,7 +99,7 @@ export const Products = ({
           );
         }
 
-        console.log(filtered, "filtered data"); // Debugging filtered data
+        console.log(filtered, "filtered data");
         setFilteredData(filtered);
       } catch (error) {
         console.error("API error:", error);
@@ -192,7 +189,7 @@ export const Products = ({
                           </div>
                         ) : (
                           <Typography
-                            className="text-sm"
+                            className="text-sm cursor-pointer"
                             onClick={() => {
                               setCardValue(item.card || 0);
                               startEditing(item.id, "card");
@@ -226,7 +223,7 @@ export const Products = ({
                           </div>
                         ) : (
                           <Typography
-                            className="text-sm"
+                            className="text-sm cursor-pointer"
                             onClick={() => {
                               setCashValue(item.cash || 0);
                               startEditing(item.id, "cash");
@@ -260,7 +257,7 @@ export const Products = ({
                           </div>
                         ) : (
                           <Typography
-                            className="text-sm"
+                            className="text-sm cursor-pointer"
                             onClick={() => {
                               setPaymeValue(item.payme || 0);
                               startEditing(item.id, "payme");
@@ -297,7 +294,7 @@ export const Products = ({
                           </div>
                         ) : (
                           <Typography
-                            className="text-sm"
+                            className="text-sm cursor-pointer"
                             onClick={() => {
                               setCommentValue(item.comment || "");
                               startEditing(item.id, "comment");
@@ -351,6 +348,6 @@ export const Products = ({
 };
 
 const scrollStyles = css`
-  scrollbar-width: thin; /* Sets to thin scrollbar */
-  scrollbar-color: #f9784d #ffffff; /* Sets thumb and track colors */
+  scrollbar-width: thin;
+  scrollbar-color: #f9784d #ffffff;
 `;

@@ -77,10 +77,10 @@ export const CheckProducts = ({
       <StyleDiv>
         <Pagination
           current={currentPage}
-          total={totalItems} // `totalItems` serverdan olingan jami elementlar soni
+          total={totalItems}
           pageSize={pageSize}
           onChange={onPageChange}
-          showSizeChanger={false} // Sahifa hajmini o'zgartirishni o'chirish
+          showSizeChanger={false}
         />
       </StyleDiv>
     </div>
