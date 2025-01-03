@@ -91,7 +91,6 @@ const StyleDiv = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
-  /* Make sure this targets the specific active pagination item */
   .ant-pagination-item.ant-pagination-item-active {
     border-color: #ff602d !important;
     outline-color: #ff602d !important;

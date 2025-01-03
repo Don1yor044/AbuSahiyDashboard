@@ -77,7 +77,6 @@ export const Products = ({
     const fetchData = async () => {
       const token = localStorage.getItem("token");
       setIsloading(true);
-      console.log("region", regionSelect);
       console.log("data", dataSource);
 
       let filtered = dataSource;
@@ -184,7 +183,8 @@ export const Products = ({
                             />
                             <Button
                               size="small"
-                              type="primary"
+                              type="text"
+                              className="bg-[#FF602D] text-white"
                               onClick={() => handleConfirm(item.id)}
                             >
                               Save
@@ -217,7 +217,8 @@ export const Products = ({
                             />
                             <Button
                               size="small"
-                              type="primary"
+                              type="text"
+                              className="bg-[#FF602D] text-white"
                               onClick={() => handleConfirm(item.id)}
                             >
                               Save
@@ -250,7 +251,8 @@ export const Products = ({
                             />
                             <Button
                               size="small"
-                              type="primary"
+                              type="text"
+                              className="bg-[#FF602D] text-white"
                               onClick={() => handleConfirm(item.id)}
                             >
                               Save
@@ -286,7 +288,8 @@ export const Products = ({
                             />
                             <Button
                               size="small"
-                              type="primary"
+                              type="text"
+                              className="bg-[#FF602D] text-white"
                               onClick={() => handleConfirm(item.id)}
                             >
                               Save
