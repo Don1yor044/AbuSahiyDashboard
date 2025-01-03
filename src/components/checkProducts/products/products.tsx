@@ -19,7 +19,7 @@ export const Products = ({
   const [CardValue, setCardValue] = useState(0);
   const [CashValue, setCashValue] = useState(0);
   const [PaymeValue, setPaymeValue] = useState(0);
-  const [CommentValue, setCommentValue] = useState(" ");
+  const [CommentValue, setCommentValue] = useState("");
 
   const [isLoading, setIsloading] = useState(false);
 
@@ -49,6 +49,7 @@ export const Products = ({
         }
       );
       console.log("Yangi qiymat serverga jo'natildi:", response.data.data);
+      setIsloading(false);
 
       setFilteredData((prevData) =>
         prevData.map((item) =>
@@ -63,9 +64,9 @@ export const Products = ({
             : item
         )
       );
-
       setEditingField({ id: null, field: null });
     } catch (error) {
+      setIsloading(false);
       console.error("Ma'lumotni yangilashda xatolik yuz berdi:", error);
     }
   };
@@ -82,7 +83,6 @@ export const Products = ({
       let filtered = dataSource;
 
       try {
-        // Agar search mavjud bo'lsa, API dan ma'lumotni olish
         if (search.trim()) {
           const response = await axios.get(
             `https://api.abusahiy.uz/api/client/admin/dashboard/show/${search}`,
@@ -92,10 +92,9 @@ export const Products = ({
               },
             }
           );
-          filtered = response.data.data; // response dan olingan ma'lumot
+          filtered = response.data.data;
         }
 
-        // Region bo'yicha filtrni amalga oshirish
         if (regionSelect && regionSelect.toUpperCase() !== "SHOTA") {
           filtered = filtered.filter(
             (item) =>
